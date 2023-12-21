@@ -17,7 +17,7 @@ public class BoardDao {
 		
 		try {
 			Context context = new InitialContext();
-			context.lookup("java:comp/env/jdbc/oracledb");
+			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/oracledb");
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -33,7 +33,7 @@ public class BoardDao {
 		
 		try {
 			conn = dataSource.getConnection();
-			String sql = "insert into fboard(bid, bname, btitle, bcontent, bhit) values(fboard_seq.nextval,?,?,?,0)";
+			String sql = "insert into fboard(bnum, bname, btitle, bcontent, bhit) values(fboard_seq.nextval,?,?,?,0)";
 			
 			pstmt = conn.prepareStatement(sql);
 			
